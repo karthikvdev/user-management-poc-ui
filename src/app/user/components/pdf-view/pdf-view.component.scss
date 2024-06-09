@@ -1,0 +1,34 @@
+.pdf-viewer {
+    height: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 0 10px;
+        height: 35px;
+
+        .title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #a020f0;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+
+    .pdf-container {
+        height: calc(100% - 35px);
+        display: flex;
+        justify-content: center;
+
+        .pdf {
+            border: 0;
+            width: 100%;
+        }
+    }
+
+}

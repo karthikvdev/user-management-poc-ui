@@ -1,0 +1,47 @@
+<div class="table-view">
+    <div class="table-container">
+        <table class="user-table">
+            <thead class="user-table__header">
+                <tr>
+                    <th *ngFor="let column of columns">{{column}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf='!isLoading && userList?.length'>
+                <tr *ngFor="let user of userList; let i = index">
+                    <td>
+                        <span class="cell">{{i+1}}</span>
+                    </td>
+                    <td>
+                        <span class="cell">{{user?.name}}</span>
+                    </td>
+                    <td>
+                        <span class='cell'>{{user?.email}}</span>
+                    </td>
+                    <td>
+                        <span class='cell'>{{user?.phoneNumber}}</span>
+                    </td>
+                    <td>
+                        <span class='cell'>{{user?.address}}</span>
+                    </td>
+                    <td>
+                        <span class='btn-cell'>
+                            <app-progress-button (btnClick)="handleOnEdit(user)" btnName="Edit"></app-progress-button>
+                            <app-progress-button (btnClick)="deleteUser(user)" varient="outlined"
+                                btnName="Delete"></app-progress-button>
+                                <app-progress-button (btnClick)="getPdfUrl(user)" varient="outlined"
+                                btnName="View"></app-progress-button>
+                            <app-pdf-download [user]="user"></app-pdf-download>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="userList?.length == 0">
+                <tr>
+                    <td colspan="6" style="text-align: center;">
+                        {{ isLoading ? 'Loading...' : 'No Users found..' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

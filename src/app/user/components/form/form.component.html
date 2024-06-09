@@ -1,0 +1,75 @@
+<div>
+    <form [formGroup]="userForm" (ngSubmit)="save()" class="user-form">
+            <div class="heading">
+                <h4>User Details</h4>
+            </div>
+            <div class="user">
+                <div class="title">
+                    <h4>Name</h4>
+                </div>
+                <mat-form-field class="form-field user-form-field" appearance="outline">
+                    <input matInput placeholder="Name" formControlName="name" >
+                    <mat-error
+                        *ngIf="userForm?.get('name')?.touched && ( userForm?.get('name')?.hasError('required') || userForm?.get('name')?.hasError('pattern'))">
+                        Name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="user">
+                <div class="title">
+                    <h4>Email</h4>
+                </div>
+                <mat-form-field class="form-field user-form-field" appearance="outline">
+                    <input matInput placeholder="Email address" formControlName="email">
+                    <mat-error *ngIf="userForm?.get('email')?.touched && userForm.get('email')?.hasError('required')">
+                        Email is required.
+                    </mat-error>
+                    <mat-error *ngIf="userForm?.get('email')?.touched && userForm.get('email')?.hasError('pattern')">
+                        Email is not valid.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="user">
+                <div class="title">
+                    <h4>Phone Number</h4>
+                </div>
+                <mat-form-field class="form-field user-form-field" appearance="outline">
+                    <input matInput placeholder="Phone Number" formControlName="phoneNumber" type="number">
+                    <mat-error
+                        *ngIf="(userForm.get('phoneNumber')?.touched) && userForm.get('phoneNumber')?.hasError('required')">
+                        Phone Number is required.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('phoneNumber')?.touched && userForm.get('phoneNumber')?.hasError('maxlength')">
+                        Phone Number cannot exceed 10 characters.
+                    </mat-error>
+                    <mat-error
+                        *ngIf="userForm.get('phoneNumber')?.touched && userForm.get('phoneNumber')?.hasError('pattern')">
+                        Phone Number is not valid.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="user">
+                <div class="title">
+                    <h4>Address</h4>
+                </div>
+                <mat-form-field class="form-field user-form-field" appearance="outline">
+                    <textarea matInput placeholder="Address" formControlName="address"
+                        (keydown.control.enter)="save()"></textarea>
+                    <mat-error
+                        *ngIf="(userForm.get('address')?.touched) && userForm.get('address')?.hasError('required')">
+                        Address is required.
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('address')?.touched && userForm.get('address')?.hasError('pattern')">
+                        Address is not valid.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="user-action-btn">
+                <app-progress-button type="button" varient="outlined" class="outlined-btn" [btnName]="cancelBtnName"
+                    (btnClick)="cancelEdit()"></app-progress-button>
+                <app-progress-button type="submit" [btnName]="data ? 'Update': 'Save'"
+                    [isLoading]="formLoading"></app-progress-button>
+            </div>
+    </form>
+</div>
